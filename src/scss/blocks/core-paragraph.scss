@@ -1,0 +1,102 @@
+///
+/// Paragraph
+///
+
+/**
+* Bug fixes
+*
+============================================================== */
+
+p {
+	text-wrap: pretty; /* https://github.com/WordPress/gutenberg/issues/55190 */
+}
+
+/* Block Style: Indicator
+============================================================== */
+p.is-style-indicator {
+	padding-inline-start: var(--wp--preset--spacing--10);
+	text-indent: -2px; /* adjust the space of the border */
+	&::before {
+		position: relative;
+		content: "";
+		border: 1px solid var(--wp--preset--color--brand-3);
+		right: var(--wp--preset--spacing--10);
+	}
+
+	/* Section Styles
+	-------------------------------------------------------------- */
+
+	/* [Brand-3] */
+	.is-style-section-brand-3 & {
+		&::before {
+			border: 1px solid var(--wp--preset--color--brand-7);
+		}
+	}
+}
+
+/* Block Style: Checkmark
+============================================================== */
+p.is-style-checkmark {
+	//text-indent: calc(-1 * (var(--wp--preset--spacing--10) + 1.25ch));
+	//padding-left: var(--wp--preset--spacing--10) + 1ch;
+	&::before {
+		position: relative;
+		content: "✓";
+		margin-inline-end: var(--wp--preset--spacing--10);
+	}
+}
+
+/**
+ * Block Style: Overline
+ */
+
+p.is-style-overline {
+	font-size: var(--wp--preset--font-size--small);
+}
+
+@keyframes swoosh {
+	0% {
+		transform: translateY(-50%) translateX(0); /* Start at the default position */
+		opacity: 1;
+	}
+	50% {
+		transform: translateY(-50%) translateX(100px); /* Move far to the right */
+		opacity: 0; /* Fade out */
+	}
+	51% {
+		transform: translateY(-50%) translateX(-100px); /* Reappear from the left */
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(-50%) translateX(0); /* Return to original position */
+		opacity: 1; /* Fade back in */
+	}
+}
+
+/**
+ * Block Style: Link Swoosh
+ */
+p.is-style-link-swoosh a {
+	position: relative;
+	text-decoration: none;
+	
+}
+
+p.is-style-link-swoosh a::before {
+	content: "";
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 0.1em;
+	bottom: 0;
+	left: 0;
+	background-color: currentColor;
+	transform: scaleX(0);
+	transform-origin: right;
+	transition: transform 0.3s ease;
+}
+
+p.is-style-link-swoosh a:hover::before {
+	transform: scaleX(1);
+	transform-origin: left;
+}

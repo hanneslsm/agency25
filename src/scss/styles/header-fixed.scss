@@ -1,0 +1,23 @@
+///
+///  Header Fixed
+///
+
+
+/** @link https://github.com/WordPress/gutenberg/issues/69255 */
+.is-style-header-fixed .wp-block-image img {
+	vertical-align: middle;
+}
+
+.is-style-header-fixed header{
+	z-index: 9999;
+	position: fixed;
+    width: 100%;
+	transition: transform 0.3s ease-in-out;
+	transform: translateY(0);
+	height: var(--wp--custom--header-fixed-height);
+	top: 0;
+}
+
+.is-style-header-fixed .header-fixed--content{
+	margin-top: var(--wp--custom--header-fixed-height);
+}

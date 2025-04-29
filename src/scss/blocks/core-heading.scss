@@ -1,0 +1,27 @@
+///
+/// Heading
+///
+
+.wp-block-heading {
+	text-wrap: balance; /* https://github.com/WordPress/gutenberg/issues/55190 */
+}
+
+.is-style-heading-alt {
+	font-size: var(--wp--preset--font-size--medium);
+	overflow: clip;
+	&:before,
+	&:after {
+		content: "";
+		width: 100%;
+		border-bottom: var(--wp--preset--color--base-3) solid;
+		display: inline-block;
+		vertical-align: middle;
+		margin: var(--wp--preset--spacing--20);
+	}
+	&:before {
+		margin-left: -100%;
+	}
+	&:after {
+		margin-right: -100%;
+	}
+}
