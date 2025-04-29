@@ -3,39 +3,37 @@
 ///
 
 
-/**
- * Hide header on scroll, except while a “core/navigation” block is open.
- *
- * Relies on the classes WordPress adds when the responsive menu is active:
- *   – .wp-block-navigation.is-menu-open   (WP ≥ 6.5)
- *   – .wp-block-navigation__responsive-container-open (WP ≤ 6.4)
- * Adjust the selector if your theme uses a different class or adds one to <body>.
- */
-
 document.addEventListener( 'DOMContentLoaded', () => {
-	const header        = document.querySelector( '.is-style-header-fixed header' );
+	const header       = document.querySelector( '.is-style-header-fixed header' );
 	if ( ! header ) {
 		return;
 	}
 
-	let lastScroll      = 0;
-	const headerHeight  = header.offsetHeight;
+	const headerHeight = header.offsetHeight;
+	let lastScroll     = 0;
 
-	const navSelector   = '.wp-block-navigation.is-menu-open, .wp-block-navigation__responsive-container-open';
-
-	const navIsOpen = () => document.querySelector( navSelector ) !== null;
+	/**
+	 * Is a core/navigation block currently open?
+	 *
+	 * WordPress adds the class `is-menu-open` (and `has-modal-open`)
+	 * to the responsive container when the hamburger toggle is active.
+	 */
+	const isNavOpen = () =>
+		Boolean(
+			document.querySelector(
+				'.wp-block-navigation__responsive-container.is-menu-open,' +
+					'.wp-block-navigation.is-menu-open'
+			)
+		);
 
 	window.addEventListener( 'scroll', () => {
-		const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+		const currentScroll =
+			window.pageYOffset || document.documentElement.scrollTop;
 
-		if ( navIsOpen() ) {
-			// Keep the header in place and reset lastScroll to avoid a jump
+		if ( isNavOpen() ) {
+			// Keep the header visible while the menu is open.
 			header.style.transform = 'translateY(0)';
-			lastScroll = currentScroll;
-			return;
-		}
-
-		if ( currentScroll > lastScroll && currentScroll > headerHeight ) {
+		} else if ( currentScroll > lastScroll && currentScroll > headerHeight ) {
 			header.style.transform = 'translateY(-100%)';
 		} else {
 			header.style.transform = 'translateY(0)';
