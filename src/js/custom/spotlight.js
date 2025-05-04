@@ -1,9 +1,8 @@
 ///
-/// Group
+/// Sportlight
+/// @verion 1.1.0
 ///
 
-/* Block Style: Spotlight
-============================================================== */
 document.addEventListener( 'DOMContentLoaded', function() {
 	const gradient = document.querySelector( '.is-style-spotlight' );
 	if ( ! gradient ) {
