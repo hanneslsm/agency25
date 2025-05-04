@@ -1,5 +1,5 @@
 ///
-/// Sportlight
+/// Spotlight
 /// @verion 1.1.0
 ///
 
