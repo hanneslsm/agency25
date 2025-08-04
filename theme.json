@@ -440,11 +440,6 @@
 					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			},
-			"core/site-title": {
-				"typography": {
-					"fontSize": "inherit"
-				}
-			},
 			"core/post-title": {
 				"elements": {
 					"link": {
@@ -536,6 +531,11 @@
 				},
 				"color": {
 					"background": "var(--wp--preset--color--base-4)"
+				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontSize": "inherit"
 				}
 			}
 		},
