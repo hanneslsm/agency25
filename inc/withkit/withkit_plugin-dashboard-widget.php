@@ -1,19 +1,19 @@
 <?php
 /**
- * agency25 Dashboard Widget
+ * WithKit Dashboard Widget
  *
- * @package agency25
- * @since 0.1.0
+ * @package withkit
  * @version 1.2.0
+ * @since 0.1.0
  */
 
-add_action('wp_dashboard_setup', 'agency25_dashboard_widgets');
-function agency25_dashboard_widgets()
+add_action('wp_dashboard_setup', 'withkit_dashboard_widgets');
+function withkit_dashboard_widgets()
 {
-	wp_add_dashboard_widget('agency25_help_widget', 'Theme Support & Server Info', 'agency25_dashboard_help');
+	wp_add_dashboard_widget('withkit_help_widget', 'Theme Support & Server Info', 'withkit_dashboard_help');
 }
 
-function agency25_dashboard_help()
+function withkit_dashboard_help()
 {
 	$theme = wp_get_theme();
 

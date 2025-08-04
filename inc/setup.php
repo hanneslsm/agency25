@@ -15,9 +15,6 @@ if (!function_exists('agency25_setup')) :
 	{
 		// Make theme available for translation.
 		load_theme_textdomain('agency25', get_template_directory() . '/languages');
-
-		// Enqueue editor styles.
-		add_editor_style('assets/css/editor-style.css');
 	}
 endif; // agency25_setup
 add_action('after_setup_theme', 'agency25_setup');
