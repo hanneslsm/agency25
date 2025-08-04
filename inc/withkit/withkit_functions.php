@@ -13,7 +13,7 @@
  */
 
 // Enqueue files
-require get_template_directory() . '/withkit_enqueuing.php';
+require get_template_directory() . '/inc/withkit/withkit_enqueuing.php';
 
 
 /**
@@ -21,24 +21,27 @@ require get_template_directory() . '/withkit_enqueuing.php';
  */
 
 // Remove WooCommerce patterns
-require get_template_directory() . '/withkit_remove-woo-patterns.php';
+require get_template_directory() . '/inc/withkit/withkit_remove-woo-patterns.php';
 
 // Remove emojis
-require get_template_directory() . '/withkit_remove-emojis.php';
+require get_template_directory() . '/inc/withkit/withkit_remove-emojis.php';
 
+
+// Remove default CSS variables ! DEV TOOL ONLY !
+// require get_template_directory() . '/inc/withkit/withkit_remove-default-css-variables.php';
 
 /**
  * Register WithKit block patterns, variations, and styles
  */
 
 // Block  Patterns
-require get_template_directory() . '/withkit_block-patterns.php';
+require get_template_directory() . '/inc/withkit/withkit_block-patterns.php';
 
 // Block  Variations
-require get_template_directory() . '/withkit_block-variations.php';
+require get_template_directory() . '/inc/withkit/withkit_block-variations.php';
 
 // Block Style Variations
-require get_template_directory() . '/withkit_block-styles.php';
+require get_template_directory() . '/inc/withkit/withkit_block-styles.php';
 
 
 
@@ -47,18 +50,10 @@ require get_template_directory() . '/withkit_block-styles.php';
  */
 
 // Dashboard Widget
-require get_template_directory() . '/inc/dashboard-widget.php';
+require get_template_directory() . '/inc/withkit/withkit_plugin-dashboard-widget.php';
 
-// Utilities
-require get_template_directory() . '/inc/withkit-utils.php';
-
-
-/**
- * Development tools
- */
-
-// Remove default CSS variables
-// require get_template_directory() . '/inc/dev-remove-defaults.php';
+// Utility Classes
+require get_template_directory() . '/inc/withkit/withkit_plugin-utils.php';
 
 // Purge theme cache
-require get_template_directory() . '/inc/dev-purge-themes-cache.php';
+require get_template_directory() . '/inc/withkit/withkit_plugin-purge-themes-cache.php';
