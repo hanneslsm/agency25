@@ -27,13 +27,12 @@
 	"license": "GPL-2.0",
 	"description": "",
 	"devDependencies": {
-		"@wordpress/scripts": "^30.11.0",
-		"copy-webpack-plugin": "^12.0.2",
-		"glob": "^11.0.0",
-		"image-minimizer-webpack-plugin": "^4.1.1",
-		"imagemin": "^9.0.0",
-		"imagemin-webpack-plugin": "^2.4.2",
-		"sharp": "^0.33.5",
+		"@wordpress/scripts": "^30.21.0",
+		"browser-sync-webpack-plugin": "^2.3.0",
+		"copy-webpack-plugin": "^12.0.0",
+		"sharp": "^0.33.0",
+		"svgo": "^3.3.2",
+		"webpack-merge": "^5.10.0",
 		"webpack-remove-empty-scripts": "^1.0.4"
 	},
 	"prettier": "@wordpress/prettier-config"
