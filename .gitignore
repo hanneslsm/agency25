@@ -1,25 +1,45 @@
+##
+# withkit .gitignore
+# Ignore files and directories in the WithKit theme
+# This file is used to specify intentionally untracked files that Git should ignore.
+#
+# @package withkit
+# @version 1.1.0
+#
+# 1.1.0: Add .webpack-cache/
+# 1.0.0: Initial version
+##
+
+# Packages
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases
+*.log
+*.sql
+*.sqlite
+
 # OS generated files
 .DS_Store
+.DS_Store?
+._*
 .Spotlight-V100
 .Trashes
+ehthumbs.db
 Thumbs.db
 
 # Build Systems
 node_modules/
-/build
+*.css.map
+.vscode
+.webpack-cache/
+build/
 
-# WordPres Files
-wp-content/*
-wp-config.php
-!wp-content/mu-plugins/
-!wp-content/plugins/
-/wp-content/plugins/hello.php
-!wp-content/themes/
-/wp-content/themes/twenty*/
-
-
-# Log files
-*.log
-
-# htaccess
-/.htaccess
+# Ignore specific files and directories
+*/*/gitignore/

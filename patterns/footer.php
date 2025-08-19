@@ -14,7 +14,7 @@
 
 <!-- wp:paragraph {"className":"is-style-link-swoosh footer__cta"} -->
 <p class="is-style-link-swoosh footer__cta"><?php /* Translators: 1. is the start of a 'a' HTML element, 2. is the end of a 'a' HTML element */ 
-echo sprintf( esc_html__( '%1$sLet\'s talk!%2$s', 'agency25' ), '<a href="' . esc_url( 'http://coswork.local/contact/' ) . '" data-type="page" data-id="535">', '</a>' ); ?></p>
+echo sprintf( esc_html__( '%1$sLet\'s talk!%2$s', 'agency25' ), '<a href="' . esc_url( '/contact/' ) . '" data-type="page" data-id="535">', '</a>' ); ?></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
@@ -34,8 +34,10 @@ echo sprintf( esc_html__( '%1$sLet\'s talk!%2$s', 'agency25' ), '<a href="' . es
 
 <!-- wp:group {"layout":{"type":"flex","flexWrap":"wrap"}} -->
 <div class="wp-block-group"><!-- wp:paragraph -->
-<p><?php esc_html_e('© creative direction', 'agency25');?></p>
+<p><?php esc_html_e('©', 'agency25');?></p>
 <!-- /wp:paragraph -->
+
+<!-- wp:site-title /-->
 
 <!-- wp:paragraph -->
 <p><?php esc_html_e('|', 'agency25');?></p>

@@ -4,27 +4,9 @@
  * Patterns Setup
  *
  * @package agency25
- * @since 0.7
+ * @version 0.1.0
+ * @since 0.1.0
  */
-
-
-/**
- * Remove core patterns.
- * @link https://developer.wordpress.org/themes/patterns/registering-patterns/#removing-core-patterns
- */
-add_action('after_setup_theme', 'agency25_remove_core_patterns');
-
-function agency25_remove_core_patterns()
-{
-    remove_theme_support('core-block-patterns');
-}
-
-/**
- * Disable remote patterns
- * @link https://developer.wordpress.org/themes/patterns/registering-patterns/#disabling-remote-patterns
- */
-add_filter('should_load_remote_block_patterns', '__return_false');
-
 
 /**
  * Register custom pattern categories
@@ -41,4 +23,3 @@ add_filter('should_load_remote_block_patterns', '__return_false');
     );
 }
 add_action( 'init', 'agency25_register_pattern_categories' );
-

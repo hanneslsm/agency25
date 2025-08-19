@@ -532,6 +532,11 @@
 				"color": {
 					"background": "var(--wp--preset--color--base-4)"
 				}
+			},
+			"core/site-title": {
+				"typography": {
+					"fontSize": "inherit"
+				}
 			}
 		},
 		"color": {
