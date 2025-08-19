@@ -2,8 +2,9 @@
  * withkit Webpack configuration
  *
  * @package withkit
- * @version 2.4.2
+ * @version 2.5.0
  *
+ * 2.5.0: Standardize image output to build/images/svg & build/images/webp; use *.asset.php for all CSS enqueues (uniform with @wordpress/scripts); clarify block.json responsibility for custom blocks
  * 2.4.2: Refactor for clarity & speed (helpers, resolved paths, plugin builders, filesystem cache)
  * 2.4.1: Remove sections SCSS pipeline; simplify BrowserSync config to proxy only; rename QUALITY_WEBP_SECONDARY → QUALITY_WEBP_CONVERT
  * 2.4.0: Add top-level config variables (image qualities/max width, BrowserSync proxy/port, toggles)
@@ -68,6 +69,10 @@ const PATHS = {
    ────────────────────────────────────────────────────────────────────────── */
 const isDir = (p) => fs.existsSync(p) && fs.statSync(p).isDirectory();
 
+/**
+ * Keeps your flat naming convention:
+ * src/scss/blocks/core-cover.scss → build/css/blocks/core-cover.css
+ */
 function recursiveScssEntries(rootDir, outBase) {
   if (!isDir(rootDir)) return {};
   const stack = [{ dir: rootDir, out: outBase }];
@@ -86,9 +91,14 @@ function recursiveScssEntries(rootDir, outBase) {
   return out;
 }
 
+/**
+ * Variation entries: src/scss/block-styles/{variation}/{block-slug}.scss
+ * → build/css/block-styles/{variation}/{block-slug}.css
+ */
 function styleVariantEntries(rootDir, outBase) {
   if (!isDir(rootDir)) return {};
-  return fs.readdirSync(rootDir)
+  return fs
+    .readdirSync(rootDir)
     .filter((name) => isDir(path.join(rootDir, name)))
     .reduce((acc, styleName) => {
       const dir = path.join(rootDir, styleName);
@@ -101,9 +111,13 @@ function styleVariantEntries(rootDir, outBase) {
     }, {});
 }
 
+/**
+ * Auto-detect block JS index/view under src/blocks/{block}/{index|view}.js
+ */
 function blockJsEntries(rootDir, outBase = 'js/blocks') {
   if (!isDir(rootDir)) return {};
-  return fs.readdirSync(rootDir)
+  return fs
+    .readdirSync(rootDir)
     .filter((name) => isDir(path.join(rootDir, name)))
     .reduce((acc, blockName) => {
       const dir = path.join(rootDir, blockName);
@@ -115,9 +129,14 @@ function blockJsEntries(rootDir, outBase = 'js/blocks') {
     }, {});
 }
 
+/**
+ * Auto-detect block style-index.scss under src/blocks/{block}/style.scss
+ * → build/css/blocks/{block}/style-index.css (to be referenced by block.json)
+ */
 function blockStyleIndexEntries(rootDir, outBase = 'css/blocks') {
   if (!isDir(rootDir)) return {};
-  return fs.readdirSync(rootDir)
+  return fs
+    .readdirSync(rootDir)
     .filter((name) => isDir(path.join(rootDir, name)))
     .reduce((acc, blockName) => {
       const fp = path.join(rootDir, blockName, 'style.scss');
@@ -174,6 +193,7 @@ function commonPlugins() {
     new RemoveEmptyScriptsPlugin({
       stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
     }),
+    // Keep style.css "Version:" in sync with package.json.version
     {
       apply: (compiler) => {
         compiler.hooks.afterEmit.tap('UpdateThemeVersionPlugin', () => {
@@ -219,14 +239,14 @@ function prodPlugins() {
         {
           from: '**/*.{jpg,jpeg,png,avif,webp}',
           context: PATHS.imagesSrc,
-          to: 'webp/[path][name].webp',
+          to: 'images/webp/[path][name].webp',
           noErrorOnMissing: true,
           transform: toWebp,
         },
         {
           from: '**/*.svg',
           context: PATHS.svgSrc,
-          to: 'svg/[path][name][ext]',
+          to: 'images/svg/[path][name][ext]',
           noErrorOnMissing: true,
           transform: optimizeSvg,
         },
@@ -267,7 +287,7 @@ module.exports = () => {
         {
           test: /\.svg$/i,
           type: 'asset/resource',
-          generator: { filename: 'images/[path][name][ext]' },
+          generator: { filename: 'images/svg/[path][name][ext]' },
         },
       ],
     },

@@ -5,8 +5,6 @@
 
 
 
-/* Import Utilities */
-import './utilities/on-stuck.js';
 
 /* Import agency25 Scripts */
 import './custom/spotlight.js';
