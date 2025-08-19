@@ -2,9 +2,10 @@
  * withkit Webpack configuration
  *
  * @package withkit
- * @version 2.5.0
+ * @version 2.5.1
  *
- * 2.5.0: Standardize image output to build/images/svg & build/images/webp; use *.asset.php for all CSS enqueues (uniform with @wordpress/scripts); clarify block.json responsibility for custom blocks
+ * 2.5.1: Move converted WebP output to build/webp (separate from images)
+ * 2.5.0: Standardize image output to build/images/svg; use *.asset.php for all CSS enqueues; clarify block.json responsibility for custom blocks
  * 2.4.2: Refactor for clarity & speed (helpers, resolved paths, plugin builders, filesystem cache)
  * 2.4.1: Remove sections SCSS pipeline; simplify BrowserSync config to proxy only; rename QUALITY_WEBP_SECONDARY → QUALITY_WEBP_CONVERT
  * 2.4.0: Add top-level config variables (image qualities/max width, BrowserSync proxy/port, toggles)
@@ -70,7 +71,7 @@ const PATHS = {
 const isDir = (p) => fs.existsSync(p) && fs.statSync(p).isDirectory();
 
 /**
- * Keeps your flat naming convention:
+ * Keeps flat naming:
  * src/scss/blocks/core-cover.scss → build/css/blocks/core-cover.css
  */
 function recursiveScssEntries(rootDir, outBase) {
@@ -92,7 +93,7 @@ function recursiveScssEntries(rootDir, outBase) {
 }
 
 /**
- * Variation entries: src/scss/block-styles/{variation}/{block-slug}.scss
+ * Variations: src/scss/block-styles/{variation}/{block-slug}.scss
  * → build/css/block-styles/{variation}/{block-slug}.css
  */
 function styleVariantEntries(rootDir, outBase) {
@@ -112,7 +113,7 @@ function styleVariantEntries(rootDir, outBase) {
 }
 
 /**
- * Auto-detect block JS index/view under src/blocks/{block}/{index|view}.js
+ * Block JS index/view under src/blocks/{block}/{index|view}.js
  */
 function blockJsEntries(rootDir, outBase = 'js/blocks') {
   if (!isDir(rootDir)) return {};
@@ -130,8 +131,8 @@ function blockJsEntries(rootDir, outBase = 'js/blocks') {
 }
 
 /**
- * Auto-detect block style-index.scss under src/blocks/{block}/style.scss
- * → build/css/blocks/{block}/style-index.css (to be referenced by block.json)
+ * style.scss → style-index.css for block.json
+ * src/blocks/{block}/style.scss → build/css/blocks/{block}/style-index.css
  */
 function blockStyleIndexEntries(rootDir, outBase = 'css/blocks') {
   if (!isDir(rootDir)) return {};
@@ -193,7 +194,7 @@ function commonPlugins() {
     new RemoveEmptyScriptsPlugin({
       stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
     }),
-    // Keep style.css "Version:" in sync with package.json.version
+    // Sync style.css "Version:" with package.json.version
     {
       apply: (compiler) => {
         compiler.hooks.afterEmit.tap('UpdateThemeVersionPlugin', () => {
@@ -239,7 +240,7 @@ function prodPlugins() {
         {
           from: '**/*.{jpg,jpeg,png,avif,webp}',
           context: PATHS.imagesSrc,
-          to: 'images/webp/[path][name].webp',
+          to: 'webp/[path][name].webp', // ← separate top-level folder
           noErrorOnMissing: true,
           transform: toWebp,
         },
