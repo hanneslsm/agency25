@@ -11,12 +11,8 @@
 // Setup
 require get_template_directory() . '/inc/setup.php';
 
-// Patterns Setup
+// // Patterns Setup
 require get_template_directory() . '/inc/block-patterns.php';
 
-
-
-/**
- * WithKit
- */
-require get_template_directory() . '/inc/withkit/withkit_functions.php';
+// Enqueue files
+require get_template_directory() . '/inc/enqueuing.php';
